@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: example-configmap
+data:
+  # Configuration data can be stored as key-value pairs.
+  database_url: "https://example.org/db"
+  feature_enabled: "true"
+
+  # You can also store entire configuration files.
+  app_properties: |
+    color.good=purple
+    size.maximum=42
+    enabled=true

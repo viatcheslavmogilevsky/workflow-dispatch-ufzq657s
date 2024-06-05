@@ -1,0 +1,19 @@
+name: Just echo
+
+on:
+  check_run:
+    types: [completed]
+  workflow_dispatch:
+
+
+jobs:
+  build:
+    # if: ${{ ! by-check-run || check-label-should-be-correct }}
+    runs-on: ubuntu-latest
+    steps:
+    # - uses: actions/checkout@v3
+    - name: Echo context
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+      run: 'echo "Hello, this is context: $GITHUB_CONTEXT"'
+
