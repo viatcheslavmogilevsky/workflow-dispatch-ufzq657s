@@ -1,3 +1,4 @@
 *.rb
 *.pem
 *.json
+.*.md
