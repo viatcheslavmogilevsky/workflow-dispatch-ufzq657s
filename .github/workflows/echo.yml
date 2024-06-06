@@ -2,7 +2,8 @@ name: Just echo
 
 on:
   check_run:
-    types: [completed]
+    types:
+    - completed
   workflow_dispatch:
 
 
