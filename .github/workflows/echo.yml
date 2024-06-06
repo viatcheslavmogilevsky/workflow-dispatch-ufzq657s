@@ -1,10 +1,10 @@
 name: Just echo
 
 on:
-  check_run:
-    types:
-    - completed
-  # workflow_dispatch:
+  - check_run:
+      types:
+      - completed
+  - workflow_dispatch:
 
 
 jobs:
