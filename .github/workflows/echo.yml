@@ -17,6 +17,7 @@ jobs:
         DEBUG_IS_CURRENT_REF_MAIN: ${{ github.ref == 'refs/heads/main' }}
         DEBUG_CURRENT_CONTEXT: ${{ github.event.context }}
         DEBUG_DOES_CURRENT_CONTEXT_STARTWITH: ${{ startsWith(github.event.context,'continuous-delivery/') }}
+        DEBUG_RIGHT_PART: ${{ github.ref == 'refs/heads/main' && startsWith(github.event.context'continuous-delivery/') }}
       run: |
         echo "DEBUG_EVENT_NAME: $DEBUG_EVENT_NAME"
         echo "DEBUG_IS_NOT_EVENT_STATUS: $DEBUG_IS_NOT_EVENT_STATUS"
@@ -24,11 +25,12 @@ jobs:
         echo "DEBUG_IS_CURRENT_REF_MAIN: $DEBUG_IS_CURRENT_REF_MAIN"
         echo "DEBUG_CURRENT_CONTEXT: $DEBUG_CURRENT_CONTEXT"
         echo "DEBUG_DOES_CURRENT_CONTEXT_STARTWITH: $DEBUG_DOES_CURRENT_CONTEXT_STARTWITH"
+        echo "DEBUG_RIGHT_PART: $DEBUG_RIGHT_PART"
 
 
 
   build:
-    if: ${{ github.event_name != 'status' || (github.ref == 'refs/heads/main' && startsWith(github.context,'continuous-delivery/')) }}
+    if: ${{ github.event_name != 'status' || (github.ref == 'refs/heads/main' && startsWith(github.event.context,'continuous-delivery/')) }}
     runs-on: ubuntu-latest
     steps:
     # - uses: actions/checkout@v3
