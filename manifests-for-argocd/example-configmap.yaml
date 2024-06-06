@@ -4,7 +4,7 @@ metadata:
   name: example-configmap
 data:
   # Configuration data can be stored as key-value pairs.
-  database_url: "https://example.org/db"
+  database_url: "https://example.org/dbdb"
   feature_enabled: "true"
 
   # You can also store entire configuration files.
