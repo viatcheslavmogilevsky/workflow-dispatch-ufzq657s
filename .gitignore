@@ -2,3 +2,4 @@
 *.pem
 *.json
 .*.md
+.*.sh
