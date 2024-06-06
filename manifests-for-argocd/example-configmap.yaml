@@ -9,6 +9,6 @@ data:
 
   # You can also store entire configuration files.
   app_properties: |
-    color.good=purple
+    color.good=green
     size.maximum=24
     enabled=true
