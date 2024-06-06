@@ -17,7 +17,7 @@ jobs:
         DEBUG_IS_CURRENT_REF_MAIN: ${{ github.ref == 'refs/heads/main' }}
         DEBUG_CURRENT_CONTEXT: ${{ github.event.context }}
         DEBUG_DOES_CURRENT_CONTEXT_STARTWITH: ${{ startsWith(github.event.context,'continuous-delivery/') }}
-        DEBUG_RIGHT_PART: ${{ github.ref == 'refs/heads/main' && startsWith(github.event.context'continuous-delivery/') }}
+        DEBUG_RIGHT_PART: ${{ github.ref == 'refs/heads/main' && startsWith(github.event.context,'continuous-delivery/') }}
       run: |
         echo "DEBUG_EVENT_NAME: $DEBUG_EVENT_NAME"
         echo "DEBUG_IS_NOT_EVENT_STATUS: $DEBUG_IS_NOT_EVENT_STATUS"
