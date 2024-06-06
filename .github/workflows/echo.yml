@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    # if: ${{ ! by-check-run || check-label-should-be-correct }}
+    if: ${{ github.event_name != "status" || (github.ref == "refs/heads/main" && startsWith(github.context,"continuous-delivery/")) }}
     runs-on: ubuntu-latest
     steps:
     # - uses: actions/checkout@v3
