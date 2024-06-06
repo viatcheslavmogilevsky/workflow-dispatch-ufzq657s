@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    if: ${{ github.event_name != "status" || (github.ref == "refs/heads/main" && startsWith(github.context,"continuous-delivery/")) }}
+    if: github.event_name != 'status' || (github.ref == 'refs/heads/main' && startsWith(github.context,'continuous-delivery/'))
     runs-on: ubuntu-latest
     steps:
     # - uses: actions/checkout@v3
