@@ -18,9 +18,7 @@ jobs:
       uses: octokit/request-action@v2.x
       id: get_sha_of_main
       with:
-        route: GET /repos/{owner}/{repo}/branches/main
-        owner: ${{ github.repository }}
-        repo: ${{ github.repository_owner }}
+        route: GET /repos/${{ github.repository }}/branches/main
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -28,9 +26,7 @@ jobs:
       uses: octokit/request-action@v2.x
       id: get_sha_of_develop
       with:
-        route: GET /repos/{owner}/{repo}/branches/develop
-        owner: ${{ github.repository }}
-        repo: ${{ github.repository_owner }}
+        route: GET /repos/${{ github.repository }}/branches/develop
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -46,9 +42,7 @@ jobs:
       uses: octokit/request-action@v2.x
       id: get_statuses_of_main
       with:
-        route: GET /repos/{owner}/{repo}/commits/main/statuses
-        owner: ${{ github.repository }}
-        repo: ${{ github.repository_owner }}
+        route: GET /repos/${{ github.repository }}/commits/main/statuses
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -56,9 +50,7 @@ jobs:
       uses: octokit/request-action@v2.x
       id: get_statuses_of_develop
       with:
-        route: GET /repos/{owner}/{repo}/commits/develop/statuses
-        owner: ${{ github.repository }}
-        repo: ${{ github.repository_owner }}
+        route: GET /repos/${{ github.repository }}/commits/develop/statuses
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
