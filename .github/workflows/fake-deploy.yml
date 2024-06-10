@@ -1,0 +1,74 @@
+name: Fake deploy
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    # - uses: actions/checkout@v3
+    - name: Echo context
+      id: echo_context
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+      run: 'echo "Hello, this is context: $GITHUB_CONTEXT"'
+
+    - name: getting commit sha of main
+      uses: octokit/request-action@v2.x
+      id: get_sha_of_main
+        with:
+          route: GET /repos/{owner}/{repo}/branches/main
+          owner: ${{ github.repository }}
+          repo: ${{ github.repository_owner }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: getting commit sha of develop
+      uses: octokit/request-action@v2.x
+      id: get_sha_of_develop
+        with:
+          route: GET /repos/{owner}/{repo}/branches/develop
+          owner: ${{ github.repository }}
+          repo: ${{ github.repository_owner }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: echo commit sha of main
+      id: echo_sha_of_main
+      run: "echo 'main: ${{ fromJson(steps.get_sha_of_main.outputs.data).commit.sha }}'"
+    - name: echo commit sha of develop
+      id: echo_sha_of_develop
+      run: "echo 'develop: ${{ fromJson(steps.get_sha_of_develop.outputs.data).commit.sha }}'"
+
+
+    - name: getting commit statuses of commit of main
+      uses: octokit/request-action@v2.x
+      id: get_statuses_of_main
+        with:
+          route: GET /repos/{owner}/{repo}/commits/main/statuses
+          owner: ${{ github.repository }}
+          repo: ${{ github.repository_owner }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: getting commit statuses of commit of develop
+      uses: octokit/request-action@v2.x
+      id: get_statuses_of_develop
+        with:
+          route: GET /repos/{owner}/{repo}/commits/develop/statuses
+          owner: ${{ github.repository }}
+          repo: ${{ github.repository_owner }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: echo statuses json of main
+      id: echo_statuses_of_main
+      run: "echo 'statuses: main: ${{ toJson(steps.get_statuses_of_main.outputs.data) }}'"
+    - name: echo statuses json of develop
+      id: echo_statuses_of_develop
+      run: "echo 'statuses: develop: ${{ toJson(steps.get_statuses_of_develop.outputs.data) }}'"
+
+
+
+
