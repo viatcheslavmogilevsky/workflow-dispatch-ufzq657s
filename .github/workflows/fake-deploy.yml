@@ -17,22 +17,22 @@ jobs:
     - name: getting commit sha of main
       uses: octokit/request-action@v2.x
       id: get_sha_of_main
-        with:
-          route: GET /repos/{owner}/{repo}/branches/main
-          owner: ${{ github.repository }}
-          repo: ${{ github.repository_owner }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        route: GET /repos/{owner}/{repo}/branches/main
+        owner: ${{ github.repository }}
+        repo: ${{ github.repository_owner }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: getting commit sha of develop
       uses: octokit/request-action@v2.x
       id: get_sha_of_develop
-        with:
-          route: GET /repos/{owner}/{repo}/branches/develop
-          owner: ${{ github.repository }}
-          repo: ${{ github.repository_owner }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        route: GET /repos/{owner}/{repo}/branches/develop
+        owner: ${{ github.repository }}
+        repo: ${{ github.repository_owner }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: echo commit sha of main
       id: echo_sha_of_main
@@ -45,22 +45,22 @@ jobs:
     - name: getting commit statuses of commit of main
       uses: octokit/request-action@v2.x
       id: get_statuses_of_main
-        with:
-          route: GET /repos/{owner}/{repo}/commits/main/statuses
-          owner: ${{ github.repository }}
-          repo: ${{ github.repository_owner }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        route: GET /repos/{owner}/{repo}/commits/main/statuses
+        owner: ${{ github.repository }}
+        repo: ${{ github.repository_owner }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: getting commit statuses of commit of develop
       uses: octokit/request-action@v2.x
       id: get_statuses_of_develop
-        with:
-          route: GET /repos/{owner}/{repo}/commits/develop/statuses
-          owner: ${{ github.repository }}
-          repo: ${{ github.repository_owner }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        route: GET /repos/{owner}/{repo}/commits/develop/statuses
+        owner: ${{ github.repository }}
+        repo: ${{ github.repository_owner }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: echo statuses json of main
       id: echo_statuses_of_main
