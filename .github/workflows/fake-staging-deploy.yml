@@ -1,4 +1,4 @@
-name: Fake deploy
+name: Fake staging deploy
 
 on:
   workflow_dispatch: {}
@@ -24,11 +24,8 @@ jobs:
     - name: Push prod git tag
       id: tag_push
       run: |
-        git tag --annotate --force --message "${{ toJson(inputs) }}" production_release
+        git tag --annotate --force --message "${{ toJson(inputs) }}" staging_release
         git push --force --tags
-
-
-
 
     # - name: getting commit sha of main
     #   uses: octokit/request-action@v2.x

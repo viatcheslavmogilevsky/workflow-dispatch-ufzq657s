@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "workflow-dispatch-ufzq657s.fullname" . }}-example-configmap
+  labels:
+    app: {{ include "workflow-dispatch-ufzq657s.fullname" . }}
+data:
+  # Configuration data can be stored as key-value pairs.
+  database_url: "https://example.org/dbdb"
+  feature_enabled: "true"
+  common_value: {{ .Values.common_val }}
+  environ_specific: {{ .Values.environ_specific }}
+  override_me: {{ default "non_overriden" .Values.override_me }} 
+
+  # You can also store entire configuration files.
+  app_properties: |
+    color.good=transparent
+    size.maximum=42
+    enabled=true
