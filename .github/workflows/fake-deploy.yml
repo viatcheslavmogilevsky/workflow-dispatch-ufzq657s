@@ -24,7 +24,9 @@ jobs:
     - name: Push prod git tag
       id: tag_push
       run: |
-        git tag --annotate --force --message "${{ toJson(inputs) }}" production_release
+        git config --global user.name '${{ inputs.override_user || 'github-actions' }}'
+        git config --global user.email '${{ inputs.override_user || 'github-actions' }}@users.noreply.github.com'
+        git tag --annotate --force --message "${{ toJson(inputs) }}" staging_release
         git push --force --tags
 
 
