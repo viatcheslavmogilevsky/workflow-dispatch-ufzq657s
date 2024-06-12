@@ -1,0 +1,15 @@
+name: Unknown deploy
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Echo context
+      id: echo_context
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+      run: 'echo "Hello, this is context: $GITHUB_CONTEXT"'
+
