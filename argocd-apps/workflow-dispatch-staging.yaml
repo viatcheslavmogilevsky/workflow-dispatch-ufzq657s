@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    notifications.argoproj.io/subscribe.on-deployed.github: '""'
+  name: workflow-dispatch-staging
+  namespace: argocd
+spec:
+  destination:
+    namespace: default
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    helm:
+      releaseName: workflow-dispatch-staging
+      valueFiles:
+      - values.yaml
+      - values.staging.yaml
+    path: manifests-for-argocd
+    repoURL: https://github.com/viatcheslavmogilevsky/workflow-dispatch-ufzq657s.git
+    targetRevision: main
+  syncPolicy:
+    automated: {}
