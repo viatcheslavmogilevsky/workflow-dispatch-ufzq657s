@@ -29,7 +29,6 @@ jobs:
       env:
         ALL_INPUTS: ${{ toJson(inputs) }}
       run: |
-        set -x
         EXPORTED_INPUTS="$(jq -jc <<<$ALL_INPUTS)"
         git config --global user.name '${{ inputs.override_user || github.actor }}'
         git config --global user.email '${{ inputs.override_user || github.actor }}@users.noreply.github.com'
