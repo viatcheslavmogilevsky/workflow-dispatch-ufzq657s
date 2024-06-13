@@ -1,0 +1,30 @@
+name: Deploy any ref
+
+on:
+  workflow_dispatch: {}
+    inputs:
+      override_ref:
+        description: 'Override reference (tag/branch) to pull source code from while using workflow from non-overriden ref (from menu)'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      id: code_checkout
+      uses: actions/checkout@v4
+      with:
+        ref: ${{ inputs.override_ref || github.ref_name }}
+    - name: List tracked files
+      id: ls_files
+      run: git ls-files
+    - name: Check current revision
+      if: check_rev
+      run: git rev-parse HEAD
+    - name: Show some files
+      id: show_some_files
+      run: |
+        cat *.txt || true
+        cat *.md || true
+        cat manifests-for-argocd/templates/configmap.yaml || true
+
