@@ -4,6 +4,8 @@ on:
   workflow_dispatch:
     inputs:
       override_user:
+      override_ref:
+        description: 'Override reference (tag/branch) to pull source code from while using workflow from reference given by dropdown from menu'
 
 permissions:
   contents: write
@@ -21,7 +23,7 @@ jobs:
       id: code_checkout
       uses: actions/checkout@v4
       with:
-        ref: ${{ github.ref_name }}
+        ref: ${{ inputs.override_ref || github.ref_name }}
         fetch-depth: 5
         fetch-tags: true
     - name: Push prod git tag

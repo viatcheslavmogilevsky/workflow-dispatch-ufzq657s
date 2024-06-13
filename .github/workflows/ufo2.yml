@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       override_ref:
-        description: 'Override reference (tag/branch) to pull source code from while using workflow from non-overriden ref (from menu)'
+        description: 'Override reference (tag/branch) to pull source code from while using workflow from reference given by dropdown from menu'
 
 jobs:
   build:
