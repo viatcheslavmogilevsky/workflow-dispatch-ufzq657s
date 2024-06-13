@@ -3,7 +3,7 @@ kind: Application
 metadata:
   annotations:
     notifications.argoproj.io/subscribe.on-helm-deployed.github: '""'
-  name: workflow-dispatch-staging
+  name: workflow-dispatch
   namespace: argocd
 spec:
   destination:
@@ -14,13 +14,13 @@ spec:
     helm:
       parameters:
       - name: override_me
-        value: yahoo2017
-      releaseName: workflow-dispatch-staging
+        value: some_custom_value111
+      releaseName: workflow-dispatch
       valueFiles:
       - values.yaml
-      - values.staging.yaml
+      - values.prod.yaml
     path: manifests-for-argocd
     repoURL: https://github.com/viatcheslavmogilevsky/workflow-dispatch-ufzq657s.git
-    targetRevision: staging
+    targetRevision: main
   syncPolicy:
     automated: {}
