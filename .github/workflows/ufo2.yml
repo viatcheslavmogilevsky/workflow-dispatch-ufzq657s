@@ -1,7 +1,7 @@
 name: Deploy any ref
 
 on:
-  workflow_dispatch: {}
+  workflow_dispatch:
     inputs:
       override_ref:
         description: 'Override reference (tag/branch) to pull source code from while using workflow from non-overriden ref (from menu)'
