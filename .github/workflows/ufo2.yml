@@ -19,7 +19,7 @@ jobs:
       id: ls_files
       run: git ls-files
     - name: Check current revision
-      if: check_rev
+      id: check_rev
       run: git rev-parse HEAD
     - name: Show some files
       id: show_some_files
