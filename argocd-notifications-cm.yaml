@@ -516,15 +516,13 @@ data:
       send:
       - app-health-degraded
       when: app.status.health.status == 'Degraded'
-  trigger.on-helm-deployed: |
-    - description: Helm application is synced and healthy. Triggered once per commit/helm parameter combination.
-      oncePer: "[app.status.operationState?.syncResult?.revision, repo.GetAppDetails().Helm.GetParameterValueByName('override_me')]"
+  trigger.on-image-update-succeeded: |
+    - description: Helm application is synced and healthy. Triggered once per values of known parameter combination (images).
+      oncePer: "[repo.GetAppDetails().Helm?.GetParameterValueByName('override_me'), repo.GetAppDetails().Helm?.GetParameterValueByName('override_that'), join(repo.GetAppDetails().Kustomize?.Images ?? [], ';')]"
       send:
       - app-deployed
       when: app.status.operationState != nil and app.status.operationState.phase in ['Succeeded']
         and app.status.health.status == 'Healthy'
-        and app.status.operationState.syncResult != nil
-        and app.status.operationState.syncResult.revision == app.status.sync.revision
   trigger.on-sync-failed: |
     - description: Application syncing has failed
       send:
