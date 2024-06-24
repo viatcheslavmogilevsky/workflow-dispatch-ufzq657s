@@ -1,0 +1,38 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: nginx-deployment
+  labels:
+    app.kubernetes.io/name: dummy
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: dummy
+  replicas: 0
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: dummy
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:alpine
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            memory: 512Mi
+          requests:
+            cpu: 200m
+            memory: 256Mi
+        volumeMounts:
+        - mountPath: /etc/nginx/fake
+          readOnly: true
+          name: extra-conf
+      volumes:
+      - name: extra-conf
+        configMap:
+          name: extra-config
+          items:
+            - key: extra.conf
+              path: extra.conf-example

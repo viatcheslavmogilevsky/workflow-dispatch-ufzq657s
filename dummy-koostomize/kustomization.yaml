@@ -1,0 +1,7 @@
+resources:
+  - dummy-nginx-deployment.yaml
+  - dummy-configmap.yaml
+
+images:
+  - name: nginx:alpine
+    newTag: latest

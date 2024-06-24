@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    notifications.argoproj.io/subscribe.on-helm-deployed.github: '""'
+  name: dummy
+  namespace: argocd
+spec:
+  destination:
+    namespace: default
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: dummy-koostomize
+    repoURL: https://github.com/viatcheslavmogilevsky/workflow-dispatch-ufzq657s.git
+    targetRevision: dummy-release
+    kustomize:
+      images:
+      - nginx:alpine-$ARGOCD_APP_REVISION
+  syncPolicy:
+    automated: {}

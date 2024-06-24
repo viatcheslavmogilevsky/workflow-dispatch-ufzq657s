@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: extra-config
+data:
+  extra.conf: |
+    example config content01
+    example config content02
+    example config content03
+    example config content04
