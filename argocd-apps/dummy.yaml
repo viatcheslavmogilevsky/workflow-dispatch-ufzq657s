@@ -13,7 +13,7 @@ spec:
   source:
     path: dummy-koostomize
     repoURL: https://github.com/viatcheslavmogilevsky/workflow-dispatch-ufzq657s.git
-    targetRevision: dummy-release
+    targetRevision: release/dummy
     kustomize:
       images:
       - nginx:alpine-$ARGOCD_APP_REVISION

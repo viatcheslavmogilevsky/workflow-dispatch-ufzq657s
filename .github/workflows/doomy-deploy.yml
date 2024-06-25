@@ -1,0 +1,47 @@
+name: Doomy deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      override_ref:
+        description: 'Override reference (tag/branch) to pull source code from while using workflow from reference given by the dropdown menu'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      id: code_checkout
+      uses: actions/checkout@v4
+      with:
+        ref: ${{ inputs.override_ref || github.ref_name }}
+        fetch-depth: 5
+
+    - name: Check checked out code and save SOURCE_SHA
+      id: code_check
+      run: |
+        git log -n 2 --oneline
+        echo "source_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+    - name: Build container image
+      id: container_image_build
+      env:
+        SOURCE_SHA: ${{ steps.code_check.outputs.source_sha }}
+      run: |
+        echo "docker build . -t nginx:alpine-$SOURCE_SHA"
+        echo "docker push nginx:alpine-$SOURCE_SHA"
+
+    - name: Push release tag to checked out SHA
+      id: push_release
+      env:
+        TARGET_RELEASE_TAG_NAME: 'release/dummy'
+      run: |
+        git tag $TARGET_RELEASE_TAG_NAME
+        git push origin TARGET_RELEASE_TAG_NAME -f
+
+
+
+
