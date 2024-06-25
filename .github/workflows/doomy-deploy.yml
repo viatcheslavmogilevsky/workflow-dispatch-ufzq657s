@@ -40,7 +40,7 @@ jobs:
         TARGET_RELEASE_TAG_NAME: 'release/dummy'
       run: |
         git tag $TARGET_RELEASE_TAG_NAME
-        git push origin TARGET_RELEASE_TAG_NAME -f
+        git push origin $TARGET_RELEASE_TAG_NAME -f
 
 
 
