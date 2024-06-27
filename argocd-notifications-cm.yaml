@@ -111,7 +111,7 @@ data:
         state: success
         label: "continuous-delivery/{{.app.metadata.name}}"
         targetURL: |
-          {{if eq .app.metadata.name "workflow-dispatch-staging"}}{{.context.argocdStagingUrl}}{{ else }}{{.context.argocdUrl}}{{end}}/applications/{{.app.metadata.name}}?operation=true
+          {{if or (eq .app.metadata.name "workflow-dispatch-staging") (eq .app.metadata.name "doomy-staging")}}{{.context.argocdStagingUrl}}{{ else }}{{.context.argocdUrl}}{{end}}/applications/{{.app.metadata.name}}?operation=true
   template.app-health-degraded: |
     email:
       subject: Application {{.app.metadata.name}} has degraded.
