@@ -111,7 +111,7 @@ data:
         state: success
         label: "continuous-delivery/{{.app.metadata.name}}"
         targetURL: |
-          {{if eq .app.metadata.name "workflow-dispatch-staging"}}{{.context.argocdStagingUrl}}{{ else }}{{.context.argocdUrl}}{{end}}/applications/{{.app.metadata.name}}?operation=true
+          {{if eq .app.metadata.name "dummy-staging"}}{{.context.argocdStagingUrl}}{{ else }}{{.context.argocdUrl}}{{end}}/applications/{{.app.metadata.name}}?operation=true
   template.app-health-degraded: |
     email:
       subject: Application {{.app.metadata.name}} has degraded.
@@ -516,13 +516,13 @@ data:
       send:
       - app-health-degraded
       when: app.status.health.status == 'Degraded'
-  trigger.on-image-update-succeeded: |
-    - description: Helm application is synced and healthy. Triggered once per values of known parameter combination (images).
-      oncePer: "[repo.GetAppDetails().Helm?.GetParameterValueByName('override_me'), repo.GetAppDetails().Helm?.GetParameterValueByName('override_that'), join(repo.GetAppDetails().Kustomize?.Images ?? [], ';')]"
-      send:
-      - app-deployed
-      when: app.status.operationState != nil and app.status.operationState.phase in ['Succeeded']
-        and app.status.health.status == 'Healthy'
+  # trigger.on-image-update-succeeded: |
+  #   - description: Helm application is synced and healthy. Triggered once per values of known parameter combination (images).
+  #     oncePer: "[repo.GetAppDetails().Helm?.GetParameterValueByName('override_me'), repo.GetAppDetails().Helm?.GetParameterValueByName('override_that'), join(repo.GetAppDetails().Kustomize?.Images ?? [], ';')]"
+  #     send:
+  #     - app-deployed
+  #     when: app.status.operationState != nil and app.status.operationState.phase in ['Succeeded']
+  #       and app.status.health.status == 'Healthy'
   trigger.on-sync-failed: |
     - description: Application syncing has failed
       send:

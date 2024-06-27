@@ -1,0 +1,22 @@
+name: Dummy notify
+
+on:
+  status: {}
+
+jobs:
+  notify:
+    if: ${{ startsWith(github.event.context,'continuous-delivery/') && contains(github.event.target_url,'example.com') }}
+    runs-on: ubuntu-latest
+    steps:
+    - name: Notify to stdout
+      id: notify
+      env:
+        DEBUG_COMMIT_SHA: ${{ github.event.commit.sha }}
+        DEBUG_COMMIT_AUTHOR: ${{ github.event.commit.author.name }}
+        DEBUG_ENV: ${{ startsWith(github.event.target_url,'https://example.com') && 'production' || 'staging' }}
+        DEBUG_STATUS: ${{ github.event.state }}
+      run: |
+        echo "DEBUG_COMMIT_SHA: $DEBUG_COMMIT_SHA"
+        echo "DEBUG_COMMIT_AUTHOR: $DEBUG_COMMIT_AUTHOR"
+        echo "DEBUG_ENV: $DEBUG_ENV"
+        echo "DEBUG_STATUS: $DEBUG_STATUS"

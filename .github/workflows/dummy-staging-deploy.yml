@@ -1,4 +1,4 @@
-name: Doomy deploy
+name: Dummy staging deploy
 
 on:
   workflow_dispatch:
@@ -37,11 +37,7 @@ jobs:
     - name: Push release tag to checked out SHA
       id: push_release
       env:
-        TARGET_RELEASE_TAG_NAME: 'release/dummy'
+        TARGET_RELEASE_TAG_NAME: 'release/staging'
       run: |
         git tag $TARGET_RELEASE_TAG_NAME
         git push origin $TARGET_RELEASE_TAG_NAME -f
-
-
-
-
