@@ -1,0 +1,13 @@
+name: Dummy clear prod cfn cache
+
+on:
+  status: {}
+  workflow_dispatch: {}
+
+jobs:
+  clear_prod_cache:
+    if: ${{ github.event_name != 'status' || (contains(github.event.branches.*.name,'main') && startsWith(github.event.context,'continuous-delivery/') && github.event.state == 'success' && startsWith(github.event.target_url,'https://example.com')) }}
+    runs-on: ubuntu-latest
+    steps:
+    - name: cfn clear cache
+      run: 'echo "Hello, this job is supposed to invalidate cloudfront cache'

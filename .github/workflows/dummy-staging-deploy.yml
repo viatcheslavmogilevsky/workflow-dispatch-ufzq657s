@@ -1,4 +1,4 @@
-name: Doomy staging deploy
+name: Dummy staging deploy
 
 on:
   workflow_dispatch:

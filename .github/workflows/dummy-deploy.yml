@@ -1,4 +1,4 @@
-name: Doomy deploy
+name: Dummy production deploy
 
 on:
   workflow_dispatch:
