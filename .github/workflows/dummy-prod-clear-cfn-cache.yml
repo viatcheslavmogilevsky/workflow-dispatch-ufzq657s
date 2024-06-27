@@ -10,4 +10,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: cfn clear cache
-      run: 'echo "Hello, this job is supposed to invalidate cloudfront cache'
+      run: 'echo "Hello, this job is supposed to invalidate cloudfront cache"'
