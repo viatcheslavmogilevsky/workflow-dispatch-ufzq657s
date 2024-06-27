@@ -3,17 +3,17 @@ kind: Application
 metadata:
   annotations:
     notifications.argoproj.io/subscribe.on-deployed.github: ""
-  name: dummy
+  name: dummy-staging
   namespace: argocd
 spec:
   destination:
-    namespace: default
+    namespace: staging
     server: https://kubernetes.default.svc
   project: default
   source:
     path: dummy-koostomize
     repoURL: https://github.com/viatcheslavmogilevsky/workflow-dispatch-ufzq657s.git
-    targetRevision: release/dummy
+    targetRevision: release/staging
     kustomize:
       images:
       - nginx:alpine-$ARGOCD_APP_REVISION
