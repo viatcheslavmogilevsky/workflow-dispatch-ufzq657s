@@ -12,7 +12,7 @@ jobs:
       id: notify
       env:
         DEBUG_COMMIT_SHA: ${{ github.event.commit.sha }}
-        DEBUG_COMMIT_AUTHOR: ${{ github.event.commit.author.name }}
+        DEBUG_COMMIT_AUTHOR: ${{ github.event.commit.author.login }}
         DEBUG_ENV: ${{ startsWith(github.event.target_url,'https://example.com') && 'production' || 'staging' }}
         DEBUG_STATUS: ${{ github.event.state }}
       run: |
