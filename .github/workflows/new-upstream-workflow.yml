@@ -1,0 +1,14 @@
+name: New upstream workflow
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Print context
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+      run: |
+        echo "Hello, this is context: $GITHUB_CONTEXT"
